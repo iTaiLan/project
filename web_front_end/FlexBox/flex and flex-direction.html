@@ -1,0 +1,127 @@
+<!doctype <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>flex and flex-direction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,body{
+            margin:20px;
+            padding: 0px;
+            background-color: white;
+            color: black;
+        }
+        .wrap{
+            display: flex;
+            /*display: inline-flex;*/
+            /*使用flexbox首先需要设置flexbox容器*/
+            
+        }
+        .wrap,.no-wrap{
+            border:1px solid red;
+        }
+        .wrap1{
+            flex-direction: row;
+        }
+        .wrap2{
+            flex-direction: row-reverse;
+        }
+        .wrap3{
+            flex-direction: column;
+        }
+        .wrap4{
+            flex-direction: column-reverse;
+        }
+        .w-div1,.w-div2,.w-div3{
+            width:100px;
+            height:100px;
+            margin:10px;
+            color:white;
+            text-align: center;
+            font-size: 20px;
+        }
+        .w-div1{
+            background-color: red;
+        }
+        .w-div2{
+            background-color: green;
+        }
+        .w-div3{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class='w1-intro'>
+        <h2>display:flex||inline-flex 和 flex-direction的介绍</h2>
+        <ul>
+            <li>伸缩容器是CSS3的新增布局方式，也就是说display:flex||inline-flex是CSS3所包含的</li>
+            <li style='color:green;'>只有设置了display:flex||inline-flex，才可以使用容器的其他属性</li>
+            <li>
+                若元素设置了display:flex属性，该元素变成伸缩容器,而其自身仍是块级元素
+            </li>
+            <li>
+                若元素设置了display:inline-flex属性，该元素变成伸缩容器,而其自身是行内块级元素
+            </li>
+            <li>
+                伸缩项(伸缩容器中的元素)将按主轴和侧轴方向进行排列
+                <ul>
+                    <li>默认主轴方向是<b>水平从左到右</b></li>
+                    <li>默认侧轴方向是<b>竖直从上到下</b></li>
+                    <li>可以通过<b>flex-direction属性</b>改变主侧轴的方向</li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的</span></li>
+                </ul>
+            </li>
+            <li>
+                flex-direction属性，可以改变伸缩项的在主轴上的排列方向，即改变主轴的方向<br>
+                其有4个值：
+                <ul>
+                    <li>row————默认值，主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>row-reverse————主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>column————主轴上的排列方向是竖直<b>从上往下</b></li>
+                    <li>column-reveerse————主轴上的排列方向是竖直<b>从下往上</b></li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的</span></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <h2>实例：(注意观察数字的变化，观察窗口大小改变时的效果)</h2>
+    <h4>1.未设置display:flex</h4>
+    <div class='no-wrap'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+    <h4>2.设置display:flex,未设置flex-direction属性</h4>
+    <div class='wrap'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+    <h4>3.设置display:flex,flex-direction:row</h4>
+    <div class='wrap wrap1'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+    <h4>3.设置display:flex,flex-direction:row-reverse</h4>
+    <div class='wrap wrap2'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+    <h4>3.设置display:flex,flex-direction:column</h4>
+    <div class='wrap wrap3'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+    <h4>4.设置display:flex,flex-direction:column-reverse</h4>
+    <div class='wrap wrap4'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+    </div>
+</body>
+</html>

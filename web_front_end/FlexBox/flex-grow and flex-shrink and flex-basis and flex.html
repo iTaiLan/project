@@ -1,0 +1,468 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,body{
+            color:black;
+            background: white;
+        }
+
+        .wrap{
+            display:flex;
+            height:100px;
+            width:500px;
+            flex-flow: row nowrap;
+            border: 1px solid red;
+        }
+        .wrap div{
+            height:50px;
+        }
+        .w-div1{
+            background-color: red;
+        }
+        .w-div2{
+            background-color: green;
+        }
+        .w-div3{
+            background-color: blue;
+        }
+
+        .fg .wrap2 .w-div1{
+            flex-grow: 2;
+        }
+        .fg .wrap3 .w-div1{
+            flex-grow: 1;
+        }
+        .fg .wrap3 .w-div2{
+            flex-grow: 2;
+        }
+        .fg .wrap3 .w-div3{
+            flex-grow: 3;
+        }
+
+        .fs  .w-div1{
+            flex-grow: 1;
+        }
+        .fs .w-div2{
+            flex-grow: 2;
+        }
+        .fs .w-div3{
+            flex-grow: 3;
+        }
+        .fs .wrap2 .w-div1{
+            
+            flex-shrink: 2;
+        }
+        .fs .wrap3 .w-div1{
+            width:300px;
+            flex-shrink: 1;
+        }
+        .fs .wrap3 .w-div2{
+            width:200px;
+            flex-shrink: 2;
+        }
+        .fs .wrap3 .w-div3{
+            width:100px;
+            flex-shrink: 3;
+        }
+
+        .fb  .w-div1{
+            flex-grow: 1;
+            flex-shrink: 3;
+        }
+        .fb .w-div2{
+            flex-grow: 2;
+            flex-shrink: 2;
+        }
+        .fb .w-div3{
+            flex-grow: 3;
+            flex-shrink: 1;
+        }
+        .fb .wrap2 .w-div1{   
+            flex-basis: 200px;
+        }
+        .fb .wrap3 .w-div1{   
+            flex-basis: 100px;
+        }
+        .fb .wrap3 .w-div2{   
+            flex-basis: 50px;
+        }
+        .fb .wrap3 .w-div3{   
+            flex-basis: 20px;
+        }
+        .fb .wrap4 div{   
+            flex-basis: auto;
+        }
+
+        .fl .wrap2 div{
+            flex:none;
+        }
+        .fl .wrap3 div{
+            flex:2;
+        }
+        .fl .wrap4 div{
+            flex:100px;
+        }
+        .fl .wrap5 div{
+            flex:auto;
+        }
+        .fl .wrap6 div{
+            flex:2 100px;
+        }
+        .fl .wrap7 .w-div1{
+            flex:2 3;
+        }
+        .fl .wrap7 .w-div2{
+            flex:2 2;
+        }
+        .fl .wrap7 .w-div3{
+            flex:2 1;
+        }
+        .fl .wrap8 .w-div1{
+            flex:2 1 100px;
+        }
+        .fl .wrap8 .w-div2{
+            flex:2 2 100px;
+        }
+        .fl .wrap8 .w-div3{
+            flex:2 3 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='w1-intro'>
+        <h2>flex-grow、flex-shrink和flex-basis的介绍</h2>
+        <ul>
+            <li>伸缩容器是CSS3的新增布局方式，也就是说display:flex||inline-flex是CSS3所包含的，浏览器的支持还不是太好</li>
+            <li style='color:green;'>只有设置了display:flex||inline-flex，才可以使用容器的其他属性</li>
+            <li>
+                若元素设置了display:flex属性，该元素变成伸缩容器,而其自身仍是块级元素
+            </li>
+            <li>
+                若元素设置了display:inline-flex属性，该元素变成伸缩容器,而其自身是行内块级元素
+            </li>
+            <li>
+                伸缩项(伸缩容器中的元素)将按主轴和侧轴方向进行排列
+                <ul>
+                    <li>默认主轴方向是<b>水平从左到右</b></li>
+                    <li>默认侧轴方向是<b>竖直从上到下</b></li>
+                    <li>可以通过<b>flex-direction属性</b>改变主侧轴的方向</li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的</span></li>
+                </ul>
+            </li>
+            <li>
+                flex-direction属性，可以改变伸缩项的在主轴上的排列方向，即改变主轴的方向<br> 其有4个值：
+                <ul>
+                    <li>row————默认值，主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>row-reverse————主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>column————主轴上的排列方向是竖直<b>从上往下</b></li>
+                    <li>column-reveerse————主轴上的排列方向是竖直<b>从下往上</b></li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的,主侧轴是相对的</span></li>
+                </ul>
+            </li>
+            <li> flex-wrap属性，可以改变伸缩项的在侧轴上的排列方向，即改变侧轴的方向
+                <br> 其有3个值：
+                <ul>
+                    <li>nowrap————默认值，侧轴在窗口存放不下伸缩项时不换行，一直沿主轴排列</li>
+                    <li>wrap————侧轴在窗口存放不下伸缩项时换行,至于方向与主轴有关，有两种选择：
+                        <ul>
+                            <li>主轴水平时，从上往下</li>
+                            <li>主轴竖直时，从左往右</li>
+                        </ul>
+                    </li>
+                    <li>wrap-reverse————侧轴在窗口存放不下伸缩项时换行,至于方向与主轴有关，有两种选择：
+                        <ul>
+                            <li>主轴水平时，从下往上</li>
+                            <li>主轴竖直时，从右往左</li>
+                        </ul>
+                    </li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的,主侧轴是相对的</span></li>
+                </ul>
+            </li>
+            <li> flex-flow属性，是flex-direction和flex-wrap的简写形式方式
+                <br> 语法：flex-flow:flex-direction flex-wrap;#填写对应的属性值
+                <h6>注意：</h6>
+                <ul>
+                    <li>可以只填写一个属性值,浏览器会自动判断使用的是flex-direction或flex-wrap</li>
+                    <li>语法中flex-direction和flex-wrap的顺序没有严格要求</li>
+                </ul>
+            </li>
+            <li>
+                order属性，是设置伸缩项(容器子元素)的顺序的，属性值是一个整数数字
+                <h6>注意：</h6>
+                <ul>
+                    <li>伸缩项的order默认值是0</li>
+                    <li>相同的order按照在文档中出现的元素排列</li>
+                    <li>order的值越大，伸缩项就越往后排列(注意，往后是与flex-direction和flex-wrap相关的)</li>
+                    <li>order属性是设置在伸缩项上的</li>
+                </ul>
+            </li>
+            <li>
+                justify-content属性，控制容器内的所有伸缩项组成的行(列)在主轴的展现方式
+                <br>5个属性值：
+                <ul>
+                    <li>flex-start————默认值，主轴上向容器开始对齐</li>
+                    <li>flex-end————主轴上向容器的结尾对齐</li>
+                    <li>center————主轴上居中于容器</li>
+                    <li>space-between————主轴上第一个和最后一个元素与容器边缘重合，其他元素平均分布</li>
+                    <li>space-around————主轴上平均分布</li>
+                    <li>一旦设置flex-grow的一类属性，justify-content属性将失效</li>
+                </ul>
+            </li>
+            <li>
+                align-items属性，控制容器内的伸缩项在侧轴的展现方式
+                <br>4个属性值：
+                <ul>
+                    <li>stretch————默认值，在侧轴上拉伸填充容器</li>
+                    <li>flex-start————侧轴上向容器的开始对齐</li>
+                    <li>flex-end————侧轴上向容器的结尾对齐</li>
+                    <li>center————侧轴上居中于容器</li>
+                    <li>baseline————侧轴上伸缩元素包含文字的基线上对齐(基线是另一个重要内容)</li>
+                </ul>
+                注意:设置了伸缩项的高度，就不能看到设置stretch的效果
+            </li>
+            <li>
+                align-self属性，控制指定伸缩项在侧轴的展现方式
+                <br>4个属性值：
+                <ul>
+                    <li>stretch————默认值，在侧轴上拉伸填充容器</li>
+                    <li>flex-start————侧轴上向容器的开始对齐</li>
+                    <li>flex-end————侧轴上向容器的结尾对齐</li>
+                    <li>center————侧轴上居中于容器</li>
+                    <li>baseline————侧轴上伸缩元素包含文字的基线上对齐(基线是另一个重要内容)</li>
+                </ul>
+                注意:设置了伸缩项的高度，就不能看到设置stretch的效果
+                <b>
+                    align-content是设置行或列如何分配侧轴的空间与justify-content类似，但是该属性只有多行或列时才产生作用,实现分布效果
+                    <br>align-items是设置容器中元素的展现方式
+                </b>
+            </li>
+            <li>
+                align-content属性，控制容器内的所有伸缩项组成的行(列)在侧轴的展现方式
+                <br>6个属性值：
+                <ul>
+                    <li>stretch————默认值，在侧轴上拉伸填充容器</li>
+                    <li>flex-start————侧轴上向容器开始对齐</li>
+                    <li>flex-end————侧轴上向容器的结尾对齐</li>
+                    <li>center————侧轴上居中于容器</li>
+                    <li>space-between————侧轴上第一个和最后一个元素与容器边缘重合，其他元素平均分布</li>
+                    <li>space-around————侧轴上平均分布</li>
+                </ul>
+                注意:该属性与align-items和justify-content的关系,
+            </li>
+            <li>
+                flex-grow属性，控制伸缩项在<b>主轴</b>的伸长程度，属性值是一个整数,
+                <ul>
+                    <li>多个伸缩项设置该属性，在容器主轴长度伸长时，整数的比例是伸缩项伸长长度的比，具体是哪个长度的比，参见flex-basis</li>
+                    <li>只对一个伸缩项设置flex-grow时，其他保持自动大小，填充整个主轴所在长度</li>
+                    <li>多个伸缩项设置flex-grow时，按比例填充整个主轴所在长度，未设置的保持原来大小</li>
+                </ul>
+            </li>
+            <li>
+                flex-shrink属性，控制伸缩项在<b>主轴</b>的收缩程度，属性值是一个整数
+                <ul>
+                    <li>默认值是1</li>
+                    <li>多个伸缩项设置该属性，在容器主轴长度收缩时，整数的比例是伸缩项收缩长度的比，具体是哪个长度的比，参见flex-basis</li>
+                    <li>flex 元素仅<b>在默认宽度之和大于容器的时候才会发生收缩</b>，其收缩的大小是依据 flex-shrink 的值。</li>
+                </ul>
+            </li>
+            <li>
+                flex-basis属性，定义了伸缩的界限，超过界限按flex-grow的比例变化，低于界限按flex-shrink的比例变化
+                <br>但是设置auto值时有所不同，auto没有界限这种现象
+                <h6>语法：flex-basis:auto|length</h6>
+                length的值与width属性的形式相同
+                <ul>
+                    <li>设置了flex-grow和flex-shrink的属性以此为基准变化</li>
+                    <li>默认值是auto</li>
+                    <li>若设置auto，则flex-grow和flex-shrink设置的伸缩比例，是伸长或收缩长度的比例</li>
+                    <li>若设置length，则flex-grow和flex-shrink设置的伸缩比例，是伸缩项长度的比例</li>
+                    <li>flex-basis虽然设置的值影响单个伸缩项的长度，但是总的长度是不变的</li>
+                    <li>flex-basis与设置width或height属性实现收缩相似，但是若设置width或height属性，在主轴变化是需要手动改width或height</li>
+                </ul>
+            </li>
+            <li> flex属性，是flex-grow,flex-shrink,flex-basis的简写形式方式
+                <br> 语法：flex-flow:flex-grow flex-shrink flex-basis;#填写对应的属性值
+                <ul>
+                    <li>取值可以为none或三个属性对应的值，null对应三个属性值(0 0 auto)</li>
+                    <li>三个属性值有省略时，对应的默认值：
+                        <ul>
+                            <li>flex-grow:1</li>
+                            <li>flex-shrink:1</li>
+                            <li>flex-basis:0</li>
+                        </ul>
+                    </li>
+                    <li>设置1个值时
+                        <ul>
+                            <li>没有单位且是整数，设置的是flex-grow</li>
+                            <li>有单位或不是整数，设置的是flex-basia</li>
+                        </ul>
+                    </li>
+                    <li>设置2个值时
+                        <ul>
+                            <li>都没有单位且是整数，设置的是flex-grow和flex-shrink</li>
+                            <li>一个有单位或不是整数，设置的是flex-grow和flex-basia</li>
+                        </ul>
+                    </li>
+                    <li>三个属性位置可以颠倒，带单位的会赋值给flex-basis,其他两个数按顺序赋值给flex-grow和flex-shrink</li>
+                </ul>
+            </li>
+            <li>
+                <h3>总结：</h3>
+                <ul>
+                    <li><h5>用于容器的属性</h5>
+                        <ul>
+                            <li>display:flex;</li>
+                            <li>flex-direction</li>
+                            <li>flex-wrap</li>
+                            <li>flex-flow</li>
+                            <li>justify-content</li>
+                            <li>align-content</li>
+                            <li>align-items</li>
+                        </ul>
+                    </li>
+                    <li><h5>用于伸缩项的属性</h5>
+                        <ul>
+                            <li>order</li>
+                            <li>align-self</li>
+                            <li>flex-grow</li>
+                            <li>flex-shrink</li>
+                            <li>flex-basis</li>
+                            <li>flex</li>
+                        </ul>
+                    </li>
+                    <li>可以嵌套使用弹性容器，即可以在伸缩项上使用display:flex</li>
+                    <li>一旦设置flex-grow的一类属性，justify-content属性将失效</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>flex-grow</h3>
+        <div class='fg'>
+            <h4>1.flex-flow:row wrap;flex-grow未设置</h4>
+            <div class='wrap wrap1'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>2.flex-flow:row wrap;只对一个伸缩项设置flex-grow</h4>
+            <div class='wrap wrap2'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>3.flex-flow:row wrap;伸缩项都设置flex-grow</h4>
+            <div class='wrap wrap3'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+        </div>
+        <h3>flex-shrink</h3>
+        <div class='fs'>
+            <h4>1.flex-flow:row wrap;伸缩项都设置flex-grow,未设置flex-shrink</h4>
+            <div class='wrap wrap1'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>2.flex-flow:row wrap;伸缩项都设置flex-grow,只对一个伸缩项设置flex-shrink</h4>
+            <div class='wrap wrap2'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>3.flex-flow:row wrap;伸缩项都设置flex-grow，伸缩项都设置flex-shrink</h4>
+            <div class='wrap wrap3'>
+                <div class='w-div1'>1,width:300px;</div>
+                <div class='w-div2'>2,width:200px;</div>
+                <div class='w-div3'>3,width:100px;</div>
+            </div>
+        </div>
+        <h3>flex-basis,需要通过浏览器调试工具改变宽度，观察结果</h3>
+        <div class='fb'>
+            <h4>1.flex-flow:row wrap;伸缩项都设置flex-grow,设置flex-shrink,未设置flex-basis</h4>
+            <div class='wrap wrap1'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>2.flex-flow:row wrap;伸缩项都设置flex-grow,设置flex-shrink,一个伸缩项设置flex-basis</h4>
+            <div class='wrap wrap2'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>3.flex-flow:row wrap;伸缩项都设置flex-grow，伸缩项都设置flex-shrink，flex-basis为数值</h4>
+            <div class='wrap wrap3'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>4.flex-flow:row wrap;伸缩项都设置flex-grow，伸缩项都设置flex-shrink，flex-basis:auto</h4>
+            <div class='wrap wrap4'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+        </div>
+        <h3>flex</h3>
+        <div class='fl'>
+            <h4>1.未设置flex</h4>
+            <div class='wrap wrap1'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>2.flex:none</h4>
+            <div class='wrap wrap2'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>3.flex:1</h4>
+            <div class='wrap wrap3'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>4.flex:30px</h4>
+            <div class='wrap wrap4'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>5.flex:auto</h4>
+            <div class='wrap wrap5'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>6.flex:2 30px</h4>
+            <div class='wrap wrap6'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>7.flex:2 2</h4>
+            <div class='wrap wrap7'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+            <h4>8.flex:2 3 30px</h4>
+            <div class='wrap wrap8'>
+                <div class='w-div1'>1</div>
+                <div class='w-div2'>2</div>
+                <div class='w-div3'>3</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

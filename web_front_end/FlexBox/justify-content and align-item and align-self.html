@@ -1,0 +1,376 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>flex and flex-direction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            background-color: white;
+            color: black;
+        }
+
+        .wrap {
+            display: flex;
+            /*display: inline-flex;*/
+            /*使用flexbox首先需要设置flexbox容器*/
+            border: 1px solid red;
+            width: 700px;
+            height: 300px;
+            flex-flow:row wrap;
+        }
+
+        .w-div1,
+        .w-div2,
+        .w-div3,
+        .w-div4,
+        .w-div5,
+        .w-div6 {
+            width: 100px;
+            height: 100px;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .w-div1 {
+            background-color: red;
+        }
+
+        .w-div2 {
+            background-color: green;
+        }
+
+        .w-div3 {
+            background-color: blue;
+        }
+
+        .w-div4 {
+            background-color: yellow;
+        }
+
+        .w-div5 {
+            background-color: orange;
+        }
+        .w-div6 {
+            background-color: rgb(255, 0, 128);
+        }
+
+
+        .wrap-jc.wrap2{
+            justify-content:flex-start;
+        }
+        .wrap-jc.wrap3{
+            justify-content:flex-end;
+        }
+        .wrap-jc.wrap4{
+            justify-content:center;
+        }
+        .wrap-jc.wrap5{
+            justify-content:space-between;
+        }
+        .wrap-jc.wrap6{
+            justify-content:space-around;
+        }
+
+        .wrap-ai.wrap1 div{
+            height:auto;
+        }
+        .wrap-ai.wrap2{
+            align-items: stretch;
+        }
+        .wrap-ai.wrap3{
+            align-items: flex-start;
+        }
+        .wrap-ai.wrap4{
+            align-items: flex-end;
+        }
+        .wrap-ai.wrap5{
+            align-items: baseline;
+        }
+        .wrap-ai.wrap5 .w-div1{
+            font-size:14px;
+            height:30px;
+        }
+        .wrap-ai.wrap5 .w-div2{
+            font-size:18px;
+            height:40px;
+        }
+        .wrap-ai.wrap5 .w-div3{
+            font-size:22px;
+            height:60px;
+        }
+        .wrap-ai.wrap5 .w-div4{
+            font-size:26px;
+            height:80px;
+        }
+        .wrap-ai.wrap5 .w-div5{
+            font-size:14px;
+            height:30px;
+        }
+
+        .wrap-ai.wrap6{
+            width:300px;
+            align-items:center;
+            /*align-items:flex-end;*/
+        }
+
+        .wrap-as .w-div1{
+            font-size: 24px;
+            height:30px;
+        }
+        .wrap-as .w-div2{
+            align-self: stretch;
+            height:auto;
+            font-size: 16px;
+        }
+        .wrap-as .w-div3{
+            align-self: flex-start;
+            font-size: 20px;
+            height:50px;
+        }
+        .wrap-as .w-div4{
+            align-self: flex-end;
+            font-size: 20px;
+            height:60px;
+        }
+        .wrap-as .w-div5{
+            align-self: baseline;
+            height: auto;
+            font-size: 12px;
+            height:80px;
+        }
+        .wrap-as .w-div6{
+            align-self: center;
+            font-size: 12px;
+            height:100px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class='w1-intro'>
+        <h2>justify-content、align-items和align-self的介绍</h2>
+        <ul>
+            <li>伸缩容器是CSS3的新增布局方式，也就是说display:flex||inline-flex是CSS3所包含的，浏览器的支持还不是太好</li>
+            <li style='color:green;'>只有设置了display:flex||inline-flex，才可以使用容器的其他属性</li>
+            <li>
+                若元素设置了display:flex属性，该元素变成伸缩容器,而其自身仍是块级元素
+            </li>
+            <li>
+                若元素设置了display:inline-flex属性，该元素变成伸缩容器,而其自身是行内块级元素
+            </li>
+            <li>
+                伸缩项(伸缩容器中的元素)将按主轴和侧轴方向进行排列
+                <ul>
+                    <li>默认主轴方向是<b>水平从左到右</b></li>
+                    <li>默认侧轴方向是<b>竖直从上到下</b></li>
+                    <li>可以通过<b>flex-direction属性</b>改变主侧轴的方向</li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的</span></li>
+                </ul>
+            </li>
+            <li>
+                flex-direction属性，可以改变伸缩项的在主轴上的排列方向，即改变主轴的方向<br> 其有4个值：
+                <ul>
+                    <li>row————默认值，主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>row-reverse————主轴上的排列方向是水平<b>从左往右</b></li>
+                    <li>column————主轴上的排列方向是竖直<b>从上往下</b></li>
+                    <li>column-reveerse————主轴上的排列方向是竖直<b>从下往上</b></li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的,主侧轴是相对的</span></li>
+                </ul>
+            </li>
+            <li> flex-wrap属性，可以改变伸缩项的在侧轴上的排列方向，即改变侧轴的方向
+                <br> 其有3个值：
+                <ul>
+                    <li>nowrap————默认值，侧轴在窗口存放不下伸缩项时不换行，一直沿主轴排列</li>
+                    <li>wrap————侧轴在窗口存放不下伸缩项时换行,至于方向与主轴有关，有两种选择：
+                        <ul>
+                            <li>主轴水平时，从上往下</li>
+                            <li>主轴竖直时，从左往右</li>
+                        </ul>
+                    </li>
+                    <li>wrap-reverse————侧轴在窗口存放不下伸缩项时换行,至于方向与主轴有关，有两种选择：
+                        <ul>
+                            <li>主轴水平时，从下往上</li>
+                            <li>主轴竖直时，从右往左</li>
+                        </ul>
+                    </li>
+                    <li><span style='color: red;'>主轴和侧轴始终是垂直的,主侧轴是相对的</span></li>
+                </ul>
+            </li>
+            <li> flex-flow属性，是flex-direction和flex-wrap的简写形式方式
+                <br> 语法：flex-flow:flex-direction flex-wrap;#填写对应的属性值
+                <h6>注意：</h6>
+                <ul>
+                    <li>可以只填写一个属性值,浏览器会自动判断使用的是flex-direction或flex-wrap</li>
+                    <li>语法中flex-direction和flex-wrap的顺序没有严格要求</li>
+                </ul>
+            </li>
+            <li>
+                order属性，是设置伸缩项(容器子元素)的顺序的，属性值是一个整数数字
+                <h6>注意：</h6>
+                <ul>
+                    <li>伸缩项的order默认值是0</li>
+                    <li>相同的order按照在文档中出现的元素排列</li>
+                    <li>order的值越大，伸缩项就越往后排列(注意，往后是与flex-direction和flex-wrap相关的)</li>
+                    <li>order属性是设置在伸缩项上的</li>
+                </ul>
+            </li>
+            <li>
+                justify-content属性，控制容器内的所有伸缩项在主轴的展现方式
+                <br>5个属性值：
+                <ul>
+                    <li>flex-start————默认值，主轴上向容器开始对齐</li>
+                    <li>flex-end————主轴上向容器的结尾对齐</li>
+                    <li>center————主轴上居中于容器</li>
+                    <li>space-between————主轴上第一个和最后一个元素与容器边缘重合，其他元素平均分布</li>
+                    <li>space-around————主轴上平均分布</li>
+                    <li>一旦设置flex-grow的一类属性，justify-content属性将失效</li>
+                </ul>
+            </li>
+            <li>
+                align-items属性，控制容器内的所有伸缩项在侧轴的展现方式
+                <br>4个属性值：
+                <ul>
+                    <li>stretch————默认值，在侧轴上拉伸填充容器</li>
+                    <li>flex-start————侧轴上向容器的开始对齐</li>
+                    <li>flex-end————侧轴上向容器的结尾对齐</li>
+                    <li>center————侧轴上居中于容器</li>
+                    <li>baseline————侧轴上伸缩元素包含文字的基线上对齐(基线是另一个重要内容)</li>
+                </ul>
+                注意:设置了伸缩项的高度，就不能看到设置stretch的效果
+            </li>
+            <li>
+                align-self属性，控制指定伸缩项在侧轴的展现方式
+                <br>4个属性值：
+                <ul>
+                    <li>stretch————默认值，在侧轴上拉伸填充容器</li>
+                    <li>flex-start————侧轴上向容器的开始对齐</li>
+                    <li>flex-end————侧轴上向容器的结尾对齐</li>
+                    <li>center————侧轴上居中于容器</li>
+                    <li>baseline————侧轴上伸缩元素包含文字的基线上对齐(基线是另一个重要内容)</li>
+                </ul>
+                注意:设置了伸缩项的高度，就不能看到设置stretch的效果
+            </li>
+        </ul>
+    </div>
+    <h2>实例：(注意观察数字的变化，注意主轴和侧轴的变化)</h2>
+    <h3>justify-content</h3>
+    <h4>1.flex-flow:row wrap;justify-content未设置</h4>
+    <div class='wrap wrap1 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>2.flex-flow:row wrap;justify-content:flex-start,默认值</h4>
+    <div class='wrap wrap2 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>3.flex-flow:row wrap;justify-content:flex-end</h4>
+    <div class='wrap wrap3 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>4.flex-flow:row wrap;justify-content:center</h4>
+    <div class='wrap wrap4 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>5.flex-flow:row wrap;justify-content:space-between</h4>
+    <div class='wrap wrap5 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>6.flex-flow:row wrap;justify-content:space-around</h4>
+    <div class='wrap wrap6 wrap-jc'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+
+
+    <h3>align-items</h3>
+    <h4>1.flex-flow:row wrap;align-items未设置,伸缩项未设置高度</h4>
+    <div class='wrap wrap1 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>2.flex-flow:row wrap;align-items:stretch,默认值，伸缩项设置高度</h4>
+    <div class='wrap wrap2 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>3.flex-flow:row wrap;align-items:flex-start</h4>
+    <div class='wrap wrap3 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>4.flex-flow:row wrap;align-items:flex-end</h4>
+    <div class='wrap wrap4 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>5.flex-flow:row wrap;align-items:baseline,通过改变其他属性值观察</h4>
+    <div class='wrap wrap5 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+    <h4>6.flex-flow:row wrap;align-items:center</h4>
+    <div class='wrap wrap6 wrap-ai'>
+        <div class='w-div1'>1</div>
+        <div class='w-div2'>2</div>
+        <div class='w-div3'>3</div>
+        <div class='w-div4'>4</div>
+        <div class='w-div5'>5</div>
+    </div>
+
+    <h3>align-self</h3>
+    <h4>1.flex-flow:row wrap;</h4>
+    <div class='wrap wrap1 wrap-as'>
+        <div class='w-div1'>1,未设置</div>
+        <div class='w-div5'>5,baseline,没产生效果</div>
+        <div class='w-div2'>2,设置stretch，默认值</div>
+        <div class='w-div3'>3,flext-start</div>
+        <div class='w-div4'>4,flex-end</div>
+        
+        <div class='w-div6'>6,center</div>
+    </div>
+</body>
+
+</html>

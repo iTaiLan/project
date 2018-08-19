@@ -22,55 +22,23 @@
         }
 
         .wrap1{
-            flex-direction: row;
-        }
-        .wrap1-2{
-            flex-wrap:nowrap;
-        }
-        .wrap1-3{
-            flex-wrap:wrap;
-        }
-        .wrap1-4{
-            flex-wrap:wrap-reverse;
+            flex-flow: row;
         }
 
         .wrap2{
-            flex-direction: row-reverse;
-        }
-        .wrap2-2{
-            flex-wrap:nowrap;
-        }
-        .wrap2-3{
-            flex-wrap:wrap;
-        }
-        .wrap2-4{
-            flex-wrap:wrap-reverse;
+            flex-flow: wrap;
         }
 
         .wrap3{
-            flex-direction: column;
-        }
-        .wrap3-2{
-            flex-wrap:nowrap;
-        }
-        .wrap3-3{
-            flex-wrap:wrap;
-        }
-        .wrap3-4{
-            flex-wrap:wrap-reverse;
+            flex-flow: row-reverse wrap;
         }
 
         .wrap4{
-            flex-direction: column-reverse;
+            flex-flow: wrap-reverse row;
         }
-        .wrap4-2{
-            flex-wrap:nowrap;
-        }
-        .wrap4-3{
-            flex-wrap:wrap;
-        }
-        .wrap4-4{
-            flex-wrap:wrap-reverse;
+
+        .wrap5{
+            flex-flow: row wrap;
         }
 
         .w-div1,.w-div2,.w-div3,.w-div4,.w-div5{
@@ -96,11 +64,26 @@
         .w-div5{
             background-color: orange;
         }
+        .wrap5 .w-div1{
+            order:2;
+        }
+        .wrap5  .w-div2{
+            order:3;
+        }
+        .wrap5  .w-div3{
+            order:1;
+        }
+        .wrap5  .w-div4{
+            order:0;
+        }
+        .wrap5  .w-div5{
+            order:0;
+        }
     </style>
 </head>
 <body>
     <div class='w1-intro'>
-        <h2>flex-wrap的介绍</h2>
+        <h2>flex-flow和order的介绍</h2>
         <ul>
             <li>伸缩容器是CSS3的新增布局方式，也就是说display:flex||inline-flex是CSS3所包含的，浏览器的支持还不是太好</li>
             <li style='color:green;'>只有设置了display:flex||inline-flex，才可以使用容器的其他属性</li>
@@ -149,138 +132,61 @@
                 <li><span style='color: red;'>主轴和侧轴始终是垂直的,主侧轴是相对的</span></li>
             </ul>
             </li>
+            <li> flex-flow属性，是flex-direction和flex-wrap的简写形式方式
+                <br> 语法：flex-flow:flex-direction flex-wrap;#填写对应的属性值
+                <h6>注意：</h6>
+                <ul>
+                    <li>可以只填写一个属性值,浏览器会自动判断使用的是flex-direction或flex-wrap</li>
+                    <li>语法中flex-direction和flex-wrap的顺序没有严格要求</li>
+                </ul>
+            </li>
+            <li>
+                order属性，是设置伸缩项(容器子元素)的顺序的，属性值是一个整数数字
+                <h6>注意：</h6>
+                <ul>
+                    <li>伸缩项的order默认值是0</li>
+                    <li>相同的order按照在文档中出现的元素排列</li>
+                    <li>order的值越大，伸缩项就越往后排列(注意，往后是与flex-direction和flex-wrap相关的)</li>
+                    <li>order属性是设置在伸缩项上的</li>
+                </ul>
+            </li>
         </ul>
     </div>
     <h2>实例：(注意观察数字的变化，注意主轴和侧轴的变化)</h2>
-    <h4>1.设置display:flex,flex-direction:row</h4>
-    <h5>未设置flex-wrap</h5>
-    <div class='wrap wrap1 wrap1-1'>
+    <h4>1.flex-flow:row;order未设置</h4>
+    <div class='wrap wrap1'>
         <div class='w-div1'>1</div>
         <div class='w-div2'>2</div>
         <div class='w-div3'>3</div>
         <div class='w-div4'>4</div>
         <div class='w-div5'>5</div>
     </div>
-    <h5>flex-wrap:nowrap</h5>
-    <div class='wrap wrap1 wrap1-2'>
+    <h4>2.flex-flow:wrap;order未设置</h4>
+    <div class='wrap wrap2'>
         <div class='w-div1'>1</div>
         <div class='w-div2'>2</div>
         <div class='w-div3'>3</div>
         <div class='w-div4'>4</div>
         <div class='w-div5'>5</div>
     </div>
-    <h5>flex-wrap:wrap</h5>
-    <div class='wrap wrap1 wrap1-3'>
+    <h4>3.flex-flow:row-reverse wrap;order未设置</h4>
+    <div class='wrap wrap3'>
         <div class='w-div1'>1</div>
         <div class='w-div2'>2</div>
         <div class='w-div3'>3</div>
         <div class='w-div4'>4</div>
         <div class='w-div5'>5</div>
     </div>
-    <h5>flex-wrap:wrap-reverse</h5>
-    <div class='wrap wrap1 wrap1-4'>
+    <h4>4.flex-flow:wrap-reverse row;order未设置</h4>
+    <div class='wrap wrap4'>
         <div class='w-div1'>1</div>
         <div class='w-div2'>2</div>
         <div class='w-div3'>3</div>
         <div class='w-div4'>4</div>
         <div class='w-div5'>5</div>
     </div>
-
-    <h4>2.设置display:flex,flex-direction:row-reverse</h4>
-    <h5>未设置flex-wrap</h5>
-    <div class='wrap wrap2 wrap2-1'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:nowrap</h5>
-    <div class='wrap wrap2  wrap2-2'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap</h5>
-    <div class='wrap wrap2  wrap2-3'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap-reverse</h5>
-    <div class='wrap wrap2  wrap2-4'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-
-    <h4>3.设置display:flex,flex-direction:column</h4>
-    <h5>未设置flex-wrap</h5>
-    <div class='wrap wrap3  wrap3-1'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:nowrap</h5>
-    <div class='wrap wrap3 wrap3-2'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap</h5>
-    <div class='wrap wrap3  wrap3-3'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap-reverse</h5>
-    <div class='wrap wrap3 wrap3-4'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-
-    <h4>4.设置display:flex,flex-direction:column-reverse</h4>
-    <h5>未设置flex-wrap</h5>
-    <div class='wrap wrap4  wrap4-1'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:nowrap</h5>
-    <div class='wrap wrap4 wrap4-2'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap</h5>
-    <div class='wrap wrap4 wrap4-3'>
-        <div class='w-div1'>1</div>
-        <div class='w-div2'>2</div>
-        <div class='w-div3'>3</div>
-        <div class='w-div4'>4</div>
-        <div class='w-div5'>5</div>
-    </div>
-    <h5>flex-wrap:wrap-reverse</h5>
-    <div class='wrap wrap4 wrap4-4'>
+    <h4>5.flex-flow:row wrap;设置order,使顺序变成45312</h4>
+    <div class='wrap wrap5'>
         <div class='w-div1'>1</div>
         <div class='w-div2'>2</div>
         <div class='w-div3'>3</div>
